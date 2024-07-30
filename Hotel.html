@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de Hoteles</title>
+    <style>
+        form {
+            width: 300px;
+            margin: 0 auto;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin: 6px 0;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 8px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <script>
+        function validarFormularioHotel() {
+            var nombre = document.forms["formHotel"]["nombre"].value;
+            var ubicacion = document.forms["formHotel"]["ubicacion"].value;
+            var habitaciones = document.forms["formHotel"]["habitaciones_disponibles"].value;
+            var tarifa = document.forms["formHotel"]["tarifa_noche"].value;
+
+            if (nombre === "" || ubicacion === "" || habitaciones === "" || tarifa === "") {
+                alert("Todos los campos deben estar completos");
+                return false;
+            }
+            if (isNaN(habitaciones) || habitaciones < 1) {
+                alert("El número de habitaciones disponibles debe ser un número positivo");
+                return false;
+            }
+            if (isNaN(tarifa) || tarifa < 0) {
+                alert("La tarifa por noche debe ser un número positivo");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <h2>Registrar un Nuevo Hotel</h2>
+    <form name="formHotel" action="registrar_hotel.php" onsubmit="return validarFormularioHotel()" method="post">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+        
+        <label for="ubicacion">Ubicación:</label>
+        <input type="text" id="ubicacion" name="ubicacion" required>
+        
+        <label for="habitaciones_disponibles">Habitaciones Disponibles:</label>
+        <input type="number" id="habitaciones_disponibles" name="habitaciones_disponibles" min="1" required>
+        
+        <label for="tarifa_noche">Tarifa por Noche:</label>
+        <input type="number" id="tarifa_noche" name="tarifa_noche" min="0" step="0.01" required>
+        
+        <input type="submit" value="Registrar Hotel">
+    </form>
+</body>
+</html>
